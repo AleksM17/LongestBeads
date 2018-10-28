@@ -10,21 +10,28 @@ namespace HWLongestBeads
     {
         static void Main(string[] args)
         {
-            int[] myArr = { 1, 2, 3, 0, 5, 6, 7, 8, 4, 10, 9, 12, 13, 14, 15, 16, 17, 18, 11 };
+            int[] myArr = { 3, 2, 1, 4, 5, 6, 0, 8, 9, 10, 11, 12, 13, 7 };
             Console.WriteLine(LongestSize(myArr));
         }
         public static int LongestSize(int[] arr)
         {
             List<int> sizes = new List<int>();
-            Dictionary<int, int> bead = new Dictionary<int, int>();
+            Dictionary<int, Dictionary<int, int>> names = new Dictionary<int, Dictionary<int, int>>();
             for (int i = 0; i < arr.Length; i++)
             {
-                bead.Add(i, arr[i]);
-                if (bead.ContainsKey(arr[i]))
+                names[i] = new Dictionary<int, int>();
+                int k = i;
+                int val = arr[k];
+                names[i].Add(k++, val);
+
+                while (arr[val] != i)
                 {
-                    sizes.Add(bead.Count);
-                    bead.Clear();
+                    val = arr[val];
+                    names[i].Add(k++, val);
                 }
+                names[i].Add(k++, arr[val]);
+
+                sizes.Add(names[i].Count);
             }
             return sizes.Max();
         }
