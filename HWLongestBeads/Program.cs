@@ -12,7 +12,10 @@ namespace HWLongestBeads
         {
             int[] myArr = { 3, 2, 1, 4, 5, 6, 0, 8, 9, 10, 11, 12, 13, 7 };
             Console.WriteLine(LongestSize(myArr));
-        }
+            //CountLongestBeads
+            CountLongestBeads countLongestBeads = new CountLongestBeads();
+            Console.WriteLine(countLongestBeads.LongestSize(myArr));
+                    }
         public static int LongestSize(int[] arr)
         {
             List<int> sizes = new List<int>();
