@@ -11,20 +11,27 @@ namespace HWLongestBeads
         public int LongestSize(int[] arr)
         {
             int maxSize = 0;
+            HashSet<int> onlyOne = new HashSet<int>();
             for (int i = 0; i < arr.Length-maxSize; i++)
             {
                 List<int> temp = new List<int>();
-
-                for (int j = i; j < arr.Length; )
+                if (!onlyOne.Contains(arr[i]))
                 {
-                    temp.Add(arr[j]);
-
-                    if (arr[j] == i)
+                    for (int j = i; j < arr.Length;)
                     {
-                        maxSize = temp.Count > maxSize ? temp.Count : maxSize;
-                        break;
+                        if (onlyOne.Add(arr[j]))
+                        {
+                            temp.Add(arr[j]);
+
+                            if (arr[j] == i)
+                            {
+                                maxSize = temp.Count > maxSize ? temp.Count : maxSize;
+                                break;
+                            }
+                            j = arr[j];
+                        }
+                        else j++;
                     }
-                    j = arr[j];
                 }
             }
             return maxSize;
